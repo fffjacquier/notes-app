@@ -1,201 +1,72 @@
 import Head from 'next/head'
+import { useState, useEffect } from 'react'
+import Layout from '../components/Layout'
+import FoldersList from '../components/FoldersList'
+import NotesFolderList from '../components/NotesFolderList'
+import Note from '../components/Note'
 
 export default function Home() {
+  // this doesn't like better than using setState to me!
+  const [loading, setLoading] = useState(true)
+  const [notes, setNotes] = useState([])
+  const [hasError, setError] = useState(false)
+  const [folders, setFolders] = useState([])
+  const [selectedFolder, setSelectedFolder] = useState(0)
+  const [currentNoteId, setCurrentNoteId] = useState(1)
+
+  async function fetchData() {
+    const res = await fetch('/api/notes')
+      .then(resp => resp.json())
+      .then(data => {
+        setLoading(false)
+        let notes = data.notes;
+        setFolders(notes.reduce((acc, note) => {
+          if (acc.indexOf(note.folder) === -1) {
+            acc.push(note.folder)
+          }
+          return acc
+        }, []))
+        setNotes(notes)
+        setCurrentNoteId(notes[0].id)
+      })
+      .catch(err => {
+        console.error(res.status, res.statusText);
+        setError(true)
+      })
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
   return (
     <div className="container">
-      <Head>
-        <title>Notes App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <Layout className="layout">
 
-      <main>
-        <h1 className="title">
-         <a href="/">Notes</a>
-        </h1>
+        {hasError && <p>An error occurred!</p>}
 
-        <p className="description">
-          Get started by editing <code>pages/index.js</code>
-        </p>
+        <FoldersList
+          setSelectedFolder={setSelectedFolder}
+          folders={folders}
+          selectedFolder={selectedFolder} />
 
-        <div className="grid">
-          <a href="https://nextjs.org/docs" className="card">
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
+        <NotesFolderList
+          selectedFolder={selectedFolder}
+          notes={notes}
+          folders={folders}
+          setCurrentNoteId={setCurrentNoteId} />
 
-          <a href="https://nextjs.org/learn" className="card">
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
+        <Note note={notes.filter(note => note.folder == folders[selectedFolder] && note.id == currentNoteId)} />
 
-          <a
-            href="https://github.com/zeit/next.js/tree/master/examples"
-            className="card"
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://zeit.co/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="card"
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with ZEIT Now.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer>
-        <a
-          href="/"
-          rel="noopener noreferrer"
-        >
-          Notes
-        </a>
-      </footer>
-
-      <style jsx>{`
-        .container {
-          min-height: 100vh;
-          padding: 0 0.5rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
+      </Layout>
+      <style>{`
+        .layout {
+          display: grid;
+          grid-template-columns: 100px 100px 1fr;
         }
-
-        main {
-          padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        footer {
-          width: 100%;
-          height: 100px;
-          border-top: 1px solid #eaeaea;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        footer img {
-          margin-left: 0.5rem;
-        }
-
-        footer a {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        a {
-          color: inherit;
-          text-decoration: none;
-        }
-
-        .title a {
-          color: #0070f3;
-          text-decoration: none;
-        }
-
-        .title a:hover,
-        .title a:focus,
-        .title a:active {
-          text-decoration: underline;
-        }
-
-        .title {
-          margin: 0;
-          line-height: 1.15;
-          font-size: 4rem;
-        }
-
-        .title,
-        .description {
-          text-align: center;
-        }
-
-        .description {
-          line-height: 1.5;
-          font-size: 1.5rem;
-        }
-
-        code {
-          background: #fafafa;
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-        }
-
-        .grid {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-wrap: wrap;
-
-          max-width: 800px;
-          margin-top: 3rem;
-        }
-
-        .card {
-          margin: 1rem;
-          flex-basis: 45%;
-          padding: 1.5rem;
-          text-align: left;
-          color: inherit;
-          text-decoration: none;
-          border: 1px solid #eaeaea;
-          border-radius: 10px;
-          transition: color 0.15s ease, border-color 0.15s ease;
-        }
-
-        .card:hover,
-        .card:focus,
-        .card:active {
-          color: #0070f3;
-          border-color: #0070f3;
-        }
-
-        .card h3 {
-          margin: 0 0 1rem 0;
-          font-size: 1.5rem;
-        }
-
-        .card p {
-          margin: 0;
-          font-size: 1.25rem;
-          line-height: 1.5;
-        }
-
-        @media (max-width: 600px) {
-          .grid {
-            width: 100%;
-            flex-direction: column;
-          }
-        }
-      `}</style>
-
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
-
-        * {
-          box-sizing: border-box;
+        section {
+          height: calc(100vh - 64px);
+          padding: 1rem;
         }
       `}</style>
     </div>

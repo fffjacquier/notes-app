@@ -36,7 +36,7 @@ export default function Home() {
           return note.id == currentNoteId;
         })[0];
         setNote(note);
-        setCurrentNoteId(note.id)
+        if (note) setCurrentNoteId(note.id)
       })
       .catch(err => {
         console.error(err);

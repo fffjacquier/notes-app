@@ -5,39 +5,42 @@ import FoldersList from '../components/FoldersList'
 import NotesFolderList from '../components/NotesFolderList'
 import Note from '../components/Note'
 
+import { notes } from '../public/notes.json'
+
 export default function Home() {
   // this doesn't like better than using setState to me!
-  const [loading, setLoading] = useState(true)
-  const [notes, setNotes] = useState([])
+  // const [loading, setLoading] = useState(true)
+  // const [notes, setNotes] = useState([])
   const [hasError, setError] = useState(false)
-  const [folders, setFolders] = useState([])
-  const [selectedFolder, setSelectedFolder] = useState(0)
-  const [currentNoteId, setCurrentNoteId] = useState(1)
+  const [folders, setFolders] = useState(notes.map(({ folder }) => folder))
+    // notes.reduce((acc, note) => {
+    //   if (acc.indexOf(note.folder) === -1) {
+    //     acc.push(note.folder)
+    //   }
+    //   return acc
+    // }, []))
+  const [selectedFolder, setSelectedFolder] = useState(folders[0])
+  const [currentNoteId, setCurrentNoteId] = useState(notes[0].id)
 
-  async function fetchData() {
-    const res = await fetch('/api/notes')
-      .then(resp => resp.json())
-      .then(data => {
-        setLoading(false)
-        let notes = data.notes;
-        setFolders(notes.reduce((acc, note) => {
-          if (acc.indexOf(note.folder) === -1) {
-            acc.push(note.folder)
-          }
-          return acc
-        }, []))
-        setNotes(notes)
-        setCurrentNoteId(notes[0].id)
-      })
-      .catch(err => {
-        console.error(res.status, res.statusText);
-        setError(true)
-      })
-  }
+  // setFolders()
+  // setNotes(notes)
+  // setCurrentNoteId(notes[0].id)
 
-  useEffect(() => {
-    fetchData()
-  }, [])
+  // async function fetchData() {
+  //   const res = Promise.resolve(notes)
+  //     // .then(resp => resp.json())
+  //     .then(notes => {
+
+  //     })
+  //     .catch(err => {
+  //       console.error('toto', err, res.status, res.statusText);
+  //       setError(true)
+  //     })
+  // }
+
+  // useEffect(() => {
+  //   fetchData()
+  // }, [])
 
   return (
     <div className="container">

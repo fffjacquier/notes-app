@@ -10,7 +10,7 @@ const FoldersList = ({ setSelectedFolder, folders, selectedFolder }) => {
             console.log(folder)
             setSelectedFolder(folder)
           }}
-          style={selectedFolder === index ? {backgroundColor: 'orange'} : {}}>
+          style={selectedFolder === folder ? {backgroundColor: 'orange'} : {}}>
           {folder}
         </p>
         )

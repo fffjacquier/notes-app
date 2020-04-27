@@ -6,31 +6,40 @@ import NotesFolderList from '../components/NotesFolderList'
 import Note from '../components/Note'
 
 export default function Home() {
-  // this doesn't like better than using setState to me!
+  // this doesn't look better than using setState so far!
   const [loading, setLoading] = useState(true)
   const [notes, setNotes] = useState([])
   const [hasError, setError] = useState(false)
   const [folders, setFolders] = useState([])
-  const [selectedFolder, setSelectedFolder] = useState(0)
   const [currentNoteId, setCurrentNoteId] = useState(1)
+  const [selectedFolder, setSelectedFolder] = useState(0)
+  const [note, setNote] = useState({})
 
   async function fetchData() {
     const res = await fetch('/api/notes')
       .then(resp => resp.json())
       .then(data => {
         setLoading(false)
-        let notes = data.notes;
-        setFolders(notes.reduce((acc, note) => {
+
+        let dataNotes = data.notes;
+
+        setFolders(dataNotes.reduce((acc, note) => {
           if (acc.indexOf(note.folder) === -1) {
             acc.push(note.folder)
           }
           return acc
         }, []))
-        setNotes(notes)
-        setCurrentNoteId(notes[0].id)
+
+        setNotes(dataNotes)
+
+        let note = dataNotes.filter(note => {
+          return note.id == currentNoteId;
+        })[0];
+        setNote(note);
+        setCurrentNoteId(note.id)
       })
       .catch(err => {
-        console.error(res.status, res.statusText);
+        console.error(err);
         setError(true)
       })
   }
@@ -38,6 +47,7 @@ export default function Home() {
   useEffect(() => {
     fetchData()
   }, [])
+
 
   return (
     <div className="container">
@@ -48,15 +58,21 @@ export default function Home() {
         <FoldersList
           setSelectedFolder={setSelectedFolder}
           folders={folders}
-          selectedFolder={selectedFolder} />
+          notes={notes}
+          selectedFolder={selectedFolder}
+          setCurrentNoteId={setCurrentNoteId}
+          setNote={setNote} />
 
         <NotesFolderList
           selectedFolder={selectedFolder}
           notes={notes}
           folders={folders}
+          currentNoteId={currentNoteId}
+          setNote={setNote}
           setCurrentNoteId={setCurrentNoteId} />
 
-        <Note note={notes.filter(note => note.folder == folders[selectedFolder] && note.id == currentNoteId)} />
+        <Note
+          note={note} />
 
       </Layout>
       <style>{`

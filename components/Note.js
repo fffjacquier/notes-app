@@ -1,9 +1,13 @@
-import React, { Component } from 'react';
 
 const Note = ({ note }) => {
   return (
     <section>
-      <div key={note.id}>{note.content}</div>
+      <textarea
+        key={note.id}
+        defaultValue={note.content}
+        style={{ width: '100%', height: '100%' }}
+      >
+      </textarea>
     </section>
   );
 }

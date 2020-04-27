@@ -5,6 +5,9 @@ import theme from '../styles/theme'
 const Layout = ({ children, home }) => {
   return (
     <div>
+      <Head>
+        <title>Notes App</title>
+      </Head>
       <header className="header">
         <h1>Notes</h1>
         <Link href="/">

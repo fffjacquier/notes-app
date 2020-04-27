@@ -5,8 +5,10 @@ const useForm = (callback) => {
   const [values, setValues] = useState({});
 
   const handleSubmit = (event) => {
-    if (event) event.preventDefault();
-      callback();
+    if (event) {
+      event.preventDefault();
+    }
+    callback();
   };
 
   const handleChange = (event) => {

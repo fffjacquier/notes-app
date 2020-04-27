@@ -8,10 +8,10 @@ export default async (req, res) => {
   await fs.writeFile(file, req.body, err => {
     if (err) {
       console.log(err)
-      res.status(200).send({result: 0})
+      res.status(200).send({ result: 0 })
       return;
     }
-    res.status(200).send({ result: 1})
+    res.status(200).send({ result: 1 })
   })
 
 }

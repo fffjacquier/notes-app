@@ -1,4 +1,7 @@
-const FoldersList = ({ setSelectedFolder, folders, selectedFolder, setNote, notes, setCurrentNoteId }) => {
+import Link from 'next/link'
+
+const FoldersList = ({ query, setSelectedFolder, folders, selectedFolder, setNote, notes, setCurrentNoteId }) => {
+  console.log(query);
 
   return (
     <section>

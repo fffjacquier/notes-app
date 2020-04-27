@@ -5,7 +5,7 @@ import FoldersList from '../components/FoldersList'
 import NotesFolderList from '../components/NotesFolderList'
 import Note from '../components/Note'
 
-export default function Home() {
+export default function Home(props) {
   // this doesn't look better than using setState so far!
   const [loading, setLoading] = useState(true)
   const [notes, setNotes] = useState([])
@@ -59,6 +59,7 @@ export default function Home() {
           setSelectedFolder={setSelectedFolder}
           folders={folders}
           notes={notes}
+          query={props.query}
           selectedFolder={selectedFolder}
           setCurrentNoteId={setCurrentNoteId}
           setNote={setNote} />

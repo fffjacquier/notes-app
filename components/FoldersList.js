@@ -1,7 +1,8 @@
 import Link from 'next/link'
 
-const FoldersList = ({ query, setSelectedFolder, folders, selectedFolder, setNote, notes, setCurrentNoteId }) => {
-  console.log(query);
+const CurrentFolder = ({ query, setSelectedFolder, folders, selectedFolder, setNote, notes, setCurrentNoteId }) => {
+  // TODO use currentFolder as query param
+  // console.log(query);
 
   return (
     <section>
@@ -39,4 +40,4 @@ const FoldersList = ({ query, setSelectedFolder, folders, selectedFolder, setNot
   )
 }
 
-export default FoldersList;
+export default CurrentFolder;

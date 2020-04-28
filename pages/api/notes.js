@@ -8,7 +8,6 @@ export default (req, res) => {
     res.status(200).send(notesString)
     res.end()
   } catch (e) {
-    console.log(e);
     res.status(200).send([])
   }
 }

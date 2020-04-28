@@ -11,9 +11,9 @@ const useForm = (callback) => {
     callback();
   };
 
-  const handleChange = (event) => {
+  const handleChange = (event, id) => {
     event.persist();
-    setValues(values => ({ ...values, [event.target.name]: event.target.value }));
+    setValues(values => ({ ...values, [event.target.name]: event.target.value, id }));
   };
 
   return {

@@ -1,20 +1,36 @@
 import useForm from '../hooks/useForm'
 
-const Note = ({ note }) => {
+const Note = ({ note, notes }) => {
   const { values, handleChange, handleSubmit } = useForm(save);
 
   async function save() {
-    console.log(values)
+    const { id, content } = values;
+    const index = notes.findIndex((note) => note.id == id)
+
+    let newNotes = {
+      "notes": [
+        ...notes.slice(0, index),
+        {
+          ...note,
+          content,
+          updatedAt: new Date().toISOString()
+        },
+        ...notes.slice(index + 1)
+      ]
+    };
+
+    let data = JSON.stringify(newNotes)
+
     const res = await fetch('/api/note/save', {
         headers: {
           'Content-Type': 'application/json'
         },
         method: 'POST',
-        body: JSON.stringify(values)
+        body: data
       })
       .then(resp => resp.json())
       .then(data => console.log("DATA", data))
-      .catch(err => console.error(err))
+      .catch(err => console.error("Error", err))
   }
 
   return (
@@ -28,7 +44,7 @@ const Note = ({ note }) => {
           key={note.id}
           name="content"
           defaultValue={note.content}
-          onChange={handleChange}
+          onChange={e => handleChange(e, note.id)}
           style={{ width: '100%', height: 'calc(100vh - 120px)' }}
         >
         </textarea>

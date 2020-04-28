@@ -3,15 +3,15 @@ const path = require('path')
 
 export default async (req, res) => {
   const file = path.join(process.cwd(), __dirname, 'public', 'notes.js')
-  console.log(req.body);
 
-  await fs.writeFile(file, req.body, err => {
+  await fs.writeFile(file, JSON.stringify(req.body, null, 2), err => {
     if (err) {
-      console.log(err)
-      res.status(200).send({ result: 0 })
+      res.status(200).send({ result: 0, error: err })
+      res.end()
       return;
     }
     res.status(200).send({ result: 1 })
+    res.end()
   })
 
 }

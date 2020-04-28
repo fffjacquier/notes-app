@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { formatRelative } from "date-fns";
 
 const NotesFolderList = ({ notes, setNote, currentNoteId, setCurrentNoteId, selectedFolder, folders }) => {
   let selectedNote = 1;
@@ -14,7 +15,7 @@ const NotesFolderList = ({ notes, setNote, currentNoteId, setCurrentNoteId, sele
           }}
           key={idx}>
           <p>{note.content}</p>
-          <time>{note.createdAt}</time>
+          <time>{formatRelative(new Date(note.updatedAt || note.createdAt), new Date())}</time>
         </div>
       ))}
       <style jsx>
@@ -28,6 +29,9 @@ const NotesFolderList = ({ notes, setNote, currentNoteId, setCurrentNoteId, sele
         }
         section {
           background: '#f9faf9';
+        }
+        time {
+          font-size: 1.2rem;
         }
         `}
       </style>

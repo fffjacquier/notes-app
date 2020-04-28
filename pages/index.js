@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import Layout from '../components/Layout'
 import FoldersList from '../components/FoldersList'
-import NotesFolderList from '../components/NotesFolderList'
+import CurrentFolder from '../components/CurrentFolder'
 import Note from '../components/Note'
 
 export default function Home(props) {
@@ -23,6 +23,9 @@ export default function Home(props) {
 
         let dataNotes = data.notes;
 
+        // extract folders from notes
+        // TODO: extract them automatically when saving
+        //       and add a "folder" entry in the json file
         setFolders(dataNotes.reduce((acc, note) => {
           if (acc.indexOf(note.folder) === -1) {
             acc.push(note.folder)
@@ -48,7 +51,6 @@ export default function Home(props) {
     fetchData()
   }, [])
 
-
   return (
     <div className="container">
       <Layout className="layout">
@@ -64,7 +66,7 @@ export default function Home(props) {
           setCurrentNoteId={setCurrentNoteId}
           setNote={setNote} />
 
-        <NotesFolderList
+        <CurrentFolder
           selectedFolder={selectedFolder}
           notes={notes}
           folders={folders}
@@ -73,6 +75,7 @@ export default function Home(props) {
           setCurrentNoteId={setCurrentNoteId} />
 
         <Note
+          notes={notes}
           note={note} />
 
       </Layout>

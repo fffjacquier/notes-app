@@ -50,6 +50,18 @@ const Note = ({ note, notes }) => {
         </textarea>
         <button type="submit">Save</button>
       </form>)}
+      <style>{`
+        textarea {
+          border: 0;
+          resize: none;
+          background: none;
+          font-size: 1.5rem;
+          line-Height: 2rem;
+        }
+        textarea:focus {
+          outline: none;
+        }
+      `}</style>
     </section>
   );
 }

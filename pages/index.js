@@ -1,19 +1,20 @@
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
 import Layout from '../components/Layout'
 import FoldersList from '../components/FoldersList'
 import CurrentFolder from '../components/CurrentFolder'
 import Note from '../components/Note'
 
-export default function Home(props) {
+export default function Home() {
   // this doesn't look better than using setState so far!
   const [loading, setLoading] = useState(true)
   const [notes, setNotes] = useState([])
   const [hasError, setError] = useState(false)
   const [folders, setFolders] = useState([])
   const [currentNoteId, setCurrentNoteId] = useState(1)
-  const [selectedFolder, setSelectedFolder] = useState(0)
   const [note, setNote] = useState({})
+  const router = useRouter()
 
   async function fetchData() {
     const res = await fetch('/api/notes')
@@ -38,8 +39,11 @@ export default function Home(props) {
         let note = dataNotes.filter(note => {
           return note.id == currentNoteId;
         })[0];
-        setNote(note);
-        if (note) setCurrentNoteId(note.id)
+        if (note) {
+          setNote(note);
+          router.push({ pathname: '/', query : { currentFolder: note.folder } })
+        }
+
       })
       .catch(err => {
         console.error(err);
@@ -58,23 +62,19 @@ export default function Home(props) {
         {hasError && <p>An error occurred!</p>}
 
         <FoldersList
-          setSelectedFolder={setSelectedFolder}
           folders={folders}
           notes={notes}
-          query={props.query}
-          selectedFolder={selectedFolder}
           setCurrentNoteId={setCurrentNoteId}
           setNote={setNote} />
 
         <CurrentFolder
-          selectedFolder={selectedFolder}
           notes={notes}
-          folders={folders}
           currentNoteId={currentNoteId}
           setNote={setNote}
           setCurrentNoteId={setCurrentNoteId} />
 
         <Note
+          setNotes={setNotes}
           notes={notes}
           note={note} />
 
@@ -82,7 +82,7 @@ export default function Home(props) {
       <style>{`
         .layout {
           display: grid;
-          grid-template-columns: 100px 100px 1fr;
+          grid-template-columns: 100px 150px 1fr;
         }
         section {
           height: calc(100vh - 64px);

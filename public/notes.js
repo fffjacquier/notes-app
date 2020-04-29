@@ -2,16 +2,16 @@
   "notes": [
     {
       "id": 1,
-      "content": "this is it, first note",
+      "content": "this is it, first note, ever",
       "createdAt": "2020-04-27T15:09:19.533Z",
-      "updatedAt": "",
+      "updatedAt": "2020-04-29T10:51:42.061Z",
       "folder": "test"
     },
     {
       "id": 2,
-      "content": "don't forget to use strict mode",
+      "content": "don't forget to use strict mode boy",
       "createdAt": "2020-04-28T13:30:19.533Z",
-      "updatedAt": "2020-04-28T13:57:11.426Z",
+      "updatedAt": "2020-04-28T13:39:19.533Z",
       "folder": "javascript"
     },
     {

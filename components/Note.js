@@ -1,6 +1,9 @@
+import { useRouter } from 'next/router'
+import { useState, useEffect } from 'react'
 import useForm from '../hooks/useForm'
 
-const Note = ({ note, notes }) => {
+const Note = ({ notes, setNotes, note }) => {
+  const router = useRouter()
   const { values, handleChange, handleSubmit } = useForm(save);
 
   async function save() {
@@ -29,7 +32,10 @@ const Note = ({ note, notes }) => {
         body: data
       })
       .then(resp => resp.json())
-      .then(data => console.log("DATA", data))
+      .then(data => {
+        console.log("DATA", data)
+        setNotes(newNotes)
+      })
       .catch(err => console.error("Error", err))
   }
 

@@ -1,25 +1,32 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useState } from "react";
 
-const CurrentFolder = ({ query, setSelectedFolder, folders, selectedFolder, setNote, notes, setCurrentNoteId }) => {
+const CurrentFolder = ({ folders, setNote, notes }) => {
   // TODO use currentFolder as query param
-  // console.log(query);
+  const router = useRouter();
+  const [currentFolder, setCurrentFolder] = useState(router.query.currentFolder)
+
+  function handleClick(e, folder) {
+    e.preventDefault();
+    router.push({ pathname: '/', query : { currentFolder: folder } })
+  }
 
   return (
     <section>
       {folders.map((folder, index) => (
         <p
+          className={folder === router.query.currentFolder ? 'selected' : ''}
           key={index}
-          onClick={e => {
-            e.preventDefault();
-            selectedFolder = index;
-            setSelectedFolder(selectedFolder);
-            let notesFolder = notes.filter(note => note.folder == folders[selectedFolder])
-            setNote(notesFolder[0] || {})
-            setCurrentNoteId(notesFolder[0].id)
-          }}
-          className={selectedFolder === index ? 'selected' : ''}
         >
-          {folder}
+          <Link
+            href={{
+              pathname: '/',
+              query: { currentFolder: folder },
+            }}
+          >
+            <a onClick={e => handleClick(e, folder)}>{folder}</a>
+          </Link>
         </p>
         )
       )}

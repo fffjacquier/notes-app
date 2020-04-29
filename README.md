@@ -19,10 +19,10 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 
 ## TODOs
 
-1. use currentFolder query to get/set currentFolder
+1. refactor the save method to be accessible from page New and Save button inside Note.js
 
-   how to add it by default after initial load?
-
-2. refactor the save method to be accessible from page New and Save button inside Note.js
-3. shorten text to 4 first words + ...
+•• Done
+- fix the save error
+- fix currentFolder
+- get only the first words and fix the date in CurretnFolder
 

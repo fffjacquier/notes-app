@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 
 export default async (req, res) => {
-  const file = path.join(process.cwd(), __dirname, 'public', 'notes.json')
+  const file = path.join(process.cwd(), __dirname, 'notes', 'notes.json')
 
   await fs.writeFile(file, JSON.stringify(req.body, null, 2), err => {
     if (err) {

@@ -1,13 +1,11 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
-import Layout from '../components/Layout'
 import FoldersList from '../components/FoldersList'
 import CurrentFolder from '../components/CurrentFolder'
 import Note from '../components/Note'
 
 export default function Home() {
-  // this doesn't look better than using setState so far!
   const [loading, setLoading] = useState(true)
   const [notes, setNotes] = useState([])
   const [hasError, setError] = useState(false)
@@ -37,10 +35,12 @@ export default function Home() {
         setNotes(dataNotes)
 
         let note = dataNotes.filter(note => {
+          console.log(note, currentNoteId)
           return note.id == currentNoteId;
         })[0];
         if (note) {
           setNote(note);
+          setCurrentNoteId(note.id)
           router.push({ pathname: '/', query : { currentFolder: note.folder } })
         }
 

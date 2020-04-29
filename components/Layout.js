@@ -31,6 +31,7 @@ const Layout = ({ children, home }) => {
         }
         .header a {
           color: var(--yellow);
+          padding: 10px;
         }
         h1 {
           line-height: 2;

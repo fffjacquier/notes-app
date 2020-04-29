@@ -7,9 +7,47 @@
     {
       "type": "chrome",
       "request": "launch",
-      "name": "Launch Chrome against localhost",
-      "url": "http://localhost:8080",
+      "name": "Next: Chrome",
+      "url": "http://localhost:3000",
       "webRoot": "${workspaceFolder}"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Next: npm dev",
+      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/next",
+      "env": {
+        "NODE_OPTIONS": "--inspect=9669"
+      },
+      "port": 9669,
+      "console": "integratedTerminal"
+    },
+    {
+      "trace": true,
+      "type": "node",
+      "request": "attach",
+      "restart": true,
+      "sourceMaps": true,
+      "smartStep": true,
+      "sourceMapPathOverrides": {
+        "webpack:///*": "${workspaceFolder}/*"
+      },
+      "outFiles": [
+        "${workspaceFolder}/.next/static/development/pages"
+      ],
+      "name": "Next: Attach to Node",
+      "port": 9753,
+      "address": "localhost",
+      "protocol": "inspector",
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Next: Full",
+      "configurations": [
+        "Next: npm dev",
+        "Next: Chrome"
+      ]
     }
   ]
 }

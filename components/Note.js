@@ -34,18 +34,20 @@ const Note = ({ notes, setNotes, note }) => {
       .then(resp => resp.json())
       .then(data => {
         console.log("DATA", data)
-        setNotes(newNotes)
+        setNotes(newNotes.notes)
       })
       .catch(err => console.error("Error", err))
   }
 
   return (
     <section>
-      {note && (<form
+      {note && (
+      <form
         onSubmit={e => {
           e.preventDefault();
           handleSubmit();
         }}>
+        <button type="submit" className="save">Save</button>
         <textarea
           key={note.id}
           name="content"
@@ -54,9 +56,8 @@ const Note = ({ notes, setNotes, note }) => {
           style={{ width: '100%', height: 'calc(100vh - 120px)' }}
         >
         </textarea>
-        <button type="submit">Save</button>
       </form>)}
-      <style>{`
+      <style jsx>{`
         textarea {
           border: 0;
           resize: none;

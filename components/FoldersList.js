@@ -17,6 +17,7 @@ const CurrentFolder = ({ folders, setNote, notes }) => {
       {folders.map((folder, index) => (
         <p
           className={folder === router.query.currentFolder ? 'selected' : ''}
+          onClick={e => handleClick(e, folder)}
           key={index}
         >
           <Link
@@ -25,7 +26,7 @@ const CurrentFolder = ({ folders, setNote, notes }) => {
               query: { currentFolder: folder },
             }}
           >
-            <a onClick={e => handleClick(e, folder)}>{folder}</a>
+            <a>{folder}</a>
           </Link>
         </p>
         )

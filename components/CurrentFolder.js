@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router'
 import { formatRelative } from "date-fns";
+import { fr } from 'date-fns/locale'
 
-const NotesFolderList = ({ notes, setNote, setCurrentNoteId, currentNoteId }) => {
+const CurrentFolder = ({ notes, setNote, setCurrentNoteId, currentNoteId }) => {
   const router = useRouter()
   let currentFolder = router.query.currentFolder
 
@@ -23,8 +24,17 @@ const NotesFolderList = ({ notes, setNote, setCurrentNoteId, currentNoteId }) =>
       {notes.filter(note => note.folder == currentFolder).map((note, idx) => {
         const wordsArr = note.content.split(' ')
         const title = wordsArr.slice(0,4).join(' ');
-        const fmtLocale = {
-
+        const formatRelativeLocale = {
+          lastWeek: "eeee 'dernier'",
+          yesterday: "'hier'",
+          today: "p",
+          tomorrow: "'demain'",
+          nextWeek: "eeee",
+          other: 'P'
+        }
+        const locale = {
+          ...fr,
+          formatRelative: token => formatRelativeLocale[token]
         }
         return (
           <div
@@ -36,7 +46,7 @@ const NotesFolderList = ({ notes, setNote, setCurrentNoteId, currentNoteId }) =>
             }}
             key={idx}>
             <p>{title}{wordsArr.length > 4 ? '...' : ''}</p>
-            <time>{formatRelative(new Date(note.updatedAt || note.createdAt), new Date())}</time>
+            <time>{formatRelative(new Date(note.updatedAt || note.createdAt), new Date(), { locale })}</time>
           </div>
         )
       })}
@@ -61,4 +71,4 @@ const NotesFolderList = ({ notes, setNote, setCurrentNoteId, currentNoteId }) =>
   );
 }
 
-export default NotesFolderList;
+export default CurrentFolder;

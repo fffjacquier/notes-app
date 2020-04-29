@@ -10,6 +10,7 @@ const Layout = ({ children, home }) => {
       </Head>
       <header className="header">
         <h1>Notes</h1>
+        <button>Save</button>
         <Link href="/">
           <a>All</a>
         </Link>
@@ -20,7 +21,9 @@ const Layout = ({ children, home }) => {
       <style jsx>{`
         .header {
           display: grid;
-          grid-template-columns: 1fr 50px 50px;
+          grid-gap: 10px;
+          grid-auto-flow: column;
+          grid-template-columns: 1fr;
           justify-content: center;
           align-items: center;
           background: ${theme.colors.black};
@@ -36,12 +39,6 @@ const Layout = ({ children, home }) => {
       `}</style>
 
       <main>{children}</main>
-      <style>{`
-        main {
-          display: grid;
-          grid-template-columns: 100px 100px 1fr;
-        }
-      `}</style>
 
     </div>
   )

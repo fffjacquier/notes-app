@@ -20,9 +20,12 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 ## TODOs
 
 1. refactor the save method to be accessible from page New and Save button inside Note.js
+2. make New page
+3. add tests
+4. what happen when you remove all notes by default?
 
 •• Done
 - fix the save error
 - fix currentFolder
 - get only the first words and fix the date in CurretnFolder
-
+- make addnote full page and with nav

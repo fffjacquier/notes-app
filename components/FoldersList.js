@@ -35,6 +35,7 @@ const CurrentFolder = ({ folders, setNote, notes }) => {
         {`
         p {
           cursor: pointer;
+          padding: 10px;
         }
         p.selected {
           background-color: orange;

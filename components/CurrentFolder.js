@@ -65,6 +65,9 @@ const CurrentFolder = ({ notes, setNote, setCurrentNoteId, currentNoteId }) => {
         time {
           font-size: 1.2rem;
         }
+        div {
+          padding: 10px;
+        }
         `}
       </style>
     </section>

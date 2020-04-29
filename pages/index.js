@@ -56,7 +56,7 @@ export default function Home() {
   }, [])
 
   return (
-    <>
+    <div className="main">
       {hasError && <p>An error occurred!</p>}
 
       <FoldersList
@@ -76,6 +76,12 @@ export default function Home() {
         notes={notes}
         note={note} />
 
-    </>
+      <style>{`
+        .main {
+          display: grid;
+          grid-template-columns: 100px 100px 1fr;
+        }
+      `}</style>
+    </div>
   )
 }

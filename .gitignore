@@ -30,4 +30,4 @@ yarn-error.log*
 .env.production.local
 
 # public
-/public/notes.js
+/public/notes.json

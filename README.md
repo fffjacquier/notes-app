@@ -23,6 +23,9 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 2. make New page
 3. add tests
 4. what happen when you remove all notes by default?
+5. autosave with debounce, and add a saving/saved label or nprogress
+6. add dynamic menus to remvoe/add folder notes
+7. export as pdf or text
 
 •• Done
 - fix the save error

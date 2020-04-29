@@ -58,6 +58,9 @@ const Note = ({ notes, setNotes, note }) => {
         </textarea>
       </form>)}
       <style jsx>{`
+        form {
+          padding: 10px;
+        }
         textarea {
           border: 0;
           resize: none;

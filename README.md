@@ -1,4 +1,5 @@
 # notes-app
+
 Notes taking app with sublevels using next.js and node
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/zeit/next.js/tree/canary/packages/create-next-app).
@@ -31,6 +32,7 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 10. add sort for notes in current folder
 
 •• Done
+
 - fix the save error
 - fix currentFolder
 - get only the first words and fix the date in CurretnFolder

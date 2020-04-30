@@ -40,7 +40,7 @@ export default function Home() {
         let note = dataNotes.filter(note => {
           return note.id == currentNoteId;
         })[0];
-        console.log(note)
+        // console.log(note)
         if (note) {
           setNote(note);
           setCurrentNoteId(note.id)
@@ -82,7 +82,7 @@ export default function Home() {
       <style>{`
         .main {
           display: grid;
-          grid-template-columns: 100px 100px 1fr;
+          grid-template-columns: 150px 150px 1fr;
         }
       `}</style>
     </div>

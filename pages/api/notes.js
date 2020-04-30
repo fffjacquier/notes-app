@@ -7,8 +7,10 @@ export default (req, res) => {
     const notesString = fs.readFileSync(file)
     res.status(200).send(notesString)
     res.end()
+    res.end()
   } catch (e) {
     res.status(200).send([])
+    res.end()
   }
 }
 

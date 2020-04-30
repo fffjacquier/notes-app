@@ -3,6 +3,10 @@ import Link from 'next/link'
 import theme from '../styles/theme'
 
 const Layout = ({ children, home }) => {
+  async function save() {
+    console.log("save");
+  }
+
   return (
     <div>
       <Head>
@@ -10,7 +14,7 @@ const Layout = ({ children, home }) => {
       </Head>
       <header className="header">
         <h1>Notes</h1>
-        <button>Save</button>
+        <button onClick={save}>Save</button>
         <Link href="/">
           <a>All</a>
         </Link>

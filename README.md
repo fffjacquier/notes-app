@@ -20,14 +20,14 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 
 ## TODOs
 
-7. export as pdf or text
-8. make New page
-9. add tests
-10. what happen when you remove all notes by default?
-11. nprogress when saving?
-12. add dynamic menus to remvoe/add folder notes
-13. add date at top of note
-14. add sort for notes in current folder
+1. export as pdf or text
+2. make New page
+3. add tests
+4. what happen when you remove all notes by default?
+5. nprogress when saving?
+6. add dynamic menus to remvoe/add folder notes
+7. add date at top of note
+8. add sort for notes in current folder
 
 •• Done
 

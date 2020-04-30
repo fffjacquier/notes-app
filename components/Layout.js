@@ -3,8 +3,20 @@ import Link from 'next/link'
 import theme from '../styles/theme'
 
 const Layout = ({ children, home }) => {
-  async function save() {
-    console.log("save");
+  async function getZip() {
+    // get all notes as json
+    const res = await fetch('/api/notes')
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log(data)
+        fetch('/api/note/zip', {
+          method: 'POST',
+          body: JSON.stringify(data),
+        })
+          .then((resp) => console.log('zip resp:', resp))
+          .catch((err) => console.error(err))
+      })
+      .catch((err) => console.error(err))
   }
 
   return (
@@ -14,7 +26,7 @@ const Layout = ({ children, home }) => {
       </Head>
       <header className="header">
         <h1>Notes</h1>
-        <button onClick={save}>Save</button>
+        <button onClick={getZip}>Export as zip</button>
         <Link href="/">
           <a>All</a>
         </Link>

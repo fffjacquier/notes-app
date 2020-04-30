@@ -28,7 +28,6 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 6. add dynamic menus to remvoe/add folder notes
 7. export as pdf or text
 8. add date at top of note
-9. add number of notes with folders name
 10. add sort for notes in current folder
 
 •• Done
@@ -37,3 +36,4 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 - fix currentFolder
 - get only the first words and fix the date in CurretnFolder
 - make addnote full page and with nav
+- add number of notes with folders name

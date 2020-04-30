@@ -40,7 +40,7 @@ const Note = ({ notes, setNotes, note }) => {
   }
 
   return (
-    <section>
+    <section style={{ display: notes.length ? 'block' : 'none'}}>
       {note && (
       <form
         onSubmit={e => {

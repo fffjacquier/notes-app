@@ -26,6 +26,9 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 5. autosave with debounce, and add a saving/saved label or nprogress
 6. add dynamic menus to remvoe/add folder notes
 7. export as pdf or text
+8. add date at top of note
+9. add number of notes with folders name
+10. add sort for notes in current folder
 
 •• Done
 - fix the save error

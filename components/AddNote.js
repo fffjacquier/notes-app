@@ -2,10 +2,10 @@ import React, { Component, useState } from 'react'
 import useForm from '../hooks/useForm'
 
 const AddNote = () => {
-  const { values, handleChange, handleSubmit } = useForm(log);
+  const { values, handleChange, handleSubmit } = useForm(save);
   const [loading, setLoading] = useState(false)
 
-  async function log() {
+  async function save() {
     console.log(values);
     //const note = await fetch('/api/create')
    // noteJson = await note.json()

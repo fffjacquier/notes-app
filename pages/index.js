@@ -25,6 +25,9 @@ export default function Home() {
         // extract folders from notes
         // TODO: extract them automatically when saving
         //       and add a "folder" entry in the json file
+        if (!dataNotes) {
+          dataNotes = []
+        }
         setFolders(dataNotes.reduce((acc, note) => {
           if (acc.indexOf(note.folder) === -1) {
             acc.push(note.folder)
@@ -35,9 +38,9 @@ export default function Home() {
         setNotes(dataNotes)
 
         let note = dataNotes.filter(note => {
-          console.log(note, currentNoteId)
           return note.id == currentNoteId;
         })[0];
+        console.log(note)
         if (note) {
           setNote(note);
           setCurrentNoteId(note.id)

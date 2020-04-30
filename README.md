@@ -20,15 +20,14 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 
 ## TODOs
 
-1. refactor the save method to be accessible from page New and Save button inside Note.js
-2. make New page
-3. add tests
-4. what happen when you remove all notes by default?
-5. autosave with debounce, and add a saving/saved label or nprogress
-6. add dynamic menus to remvoe/add folder notes
 7. export as pdf or text
-8. add date at top of note
-10. add sort for notes in current folder
+8. make New page
+9. add tests
+10. what happen when you remove all notes by default?
+11. nprogress when saving?
+12. add dynamic menus to remvoe/add folder notes
+13. add date at top of note
+14. add sort for notes in current folder
 
 •• Done
 
@@ -37,3 +36,4 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 - get only the first words and fix the date in CurretnFolder
 - make addnote full page and with nav
 - add number of notes with folders name
+- refactor save + debounce like

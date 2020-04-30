@@ -31,7 +31,7 @@ const Layout = ({ children, home }) => {
           justify-content: center;
           align-items: center;
           background: ${theme.colors.black};
-          color: ${theme.colors.offWhite}
+          color: ${theme.colors.offWhite};
         }
         .header a {
           color: var(--yellow);
@@ -44,7 +44,6 @@ const Layout = ({ children, home }) => {
       `}</style>
 
       <main>{children}</main>
-
     </div>
   )
 }

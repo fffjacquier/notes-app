@@ -16,11 +16,11 @@ export default function Home() {
 
   async function fetchData() {
     const res = await fetch('/api/notes')
-      .then(resp => resp.json())
-      .then(data => {
+      .then((resp) => resp.json())
+      .then((data) => {
         setLoading(false)
 
-        let dataNotes = data.notes;
+        let dataNotes = data.notes
 
         // extract folders from notes
         // TODO: extract them automatically when saving
@@ -28,30 +28,49 @@ export default function Home() {
         if (!dataNotes) {
           dataNotes = []
         }
-        setFolders(dataNotes.reduce((acc, note) => {
-          if (acc.indexOf(note.folder) === -1) {
-            acc.push(note.folder)
-          }
-          return acc
-        }, []))
+        setFolders(
+          dataNotes.reduce((acc, note) => {
+            if (acc.indexOf(note.folder) === -1) {
+              acc.push(note.folder)
+            }
+            return acc
+          }, [])
+        )
 
         setNotes(dataNotes)
 
-        let note = dataNotes.filter(note => {
-          return note.id == currentNoteId;
-        })[0];
+        let note = dataNotes.filter((note) => {
+          return note.id == currentNoteId
+        })[0]
         // console.log(note)
         if (note) {
-          setNote(note);
+          setNote(note)
           setCurrentNoteId(note.id)
-          router.push({ pathname: '/', query : { currentFolder: note.folder } })
+          router.push({ pathname: '/', query: { currentFolder: note.folder } })
         }
-
       })
-      .catch(err => {
-        console.error(err);
+      .catch((err) => {
+        console.error(err)
         setError(true)
       })
+  }
+
+  async function saveAll(notes) {
+    let data = JSON.stringify(notes)
+
+    const res = await fetch('/api/note/save', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: data,
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        console.log('DATA', data)
+        setNotes(notes.notes)
+      })
+      .catch((err) => console.error('Error', err))
   }
 
   useEffect(() => {
@@ -66,18 +85,17 @@ export default function Home() {
         folders={folders}
         notes={notes}
         setCurrentNoteId={setCurrentNoteId}
-        setNote={setNote} />
+        setNote={setNote}
+      />
 
       <CurrentFolder
         notes={notes}
         currentNoteId={currentNoteId}
         setNote={setNote}
-        setCurrentNoteId={setCurrentNoteId} />
+        setCurrentNoteId={setCurrentNoteId}
+      />
 
-      <Note
-        setNotes={setNotes}
-        notes={notes}
-        note={note} />
+      <Note saveAll={saveAll} notes={notes} note={note} />
 
       <style>{`
         .main {

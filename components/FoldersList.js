@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import { useState } from "react";
 
 const CurrentFolder = ({ folders, setNote, notes }) => {
-  // TODO use currentFolder as query param
   const router = useRouter();
   const [currentFolder, setCurrentFolder] = useState(router.query.currentFolder)
 

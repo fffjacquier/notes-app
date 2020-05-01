@@ -12,9 +12,11 @@ export default function Home() {
   const [folders, setFolders] = useState([])
   const [currentNoteId, setCurrentNoteId] = useState(1)
   const [note, setNote] = useState({})
+  const [message, setMessage] = useState('')
   const router = useRouter()
 
   async function fetchData() {
+    setMessage('Getting notes...')
     const res = await fetch('/api/notes')
       .then((resp) => resp.json())
       .then((data) => {
@@ -38,6 +40,7 @@ export default function Home() {
         )
 
         setNotes(dataNotes)
+        setMessage('')
 
         let note = dataNotes.filter((note) => {
           return note.id == currentNoteId
@@ -56,6 +59,7 @@ export default function Home() {
   }
 
   async function saveAll(notes) {
+    setMessage('Saving...')
     let data = JSON.stringify(notes)
 
     const res = await fetch('/api/note/save', {
@@ -68,7 +72,12 @@ export default function Home() {
       .then((resp) => resp.json())
       .then((data) => {
         console.log('DATA', data)
+        setMessage('Saved!')
         setNotes(notes.notes)
+        let timeout = setTimeout(() => {
+          setMessage('')
+          clearTimeout(timeout)
+        }, 2000)
       })
       .catch((err) => console.error('Error', err))
   }
@@ -79,28 +88,40 @@ export default function Home() {
 
   return (
     <div className="main">
-      {hasError && <p>An error occurred!</p>}
+      <div className="wrapper">
+        {hasError && <p>An error occurred!</p>}
 
-      <FoldersList
-        folders={folders}
-        notes={notes}
-        setCurrentNoteId={setCurrentNoteId}
-        setNote={setNote}
-      />
+        <FoldersList
+          folders={folders}
+          notes={notes}
+          setCurrentNoteId={setCurrentNoteId}
+          setNote={setNote}
+        />
 
-      <CurrentFolder
-        notes={notes}
-        currentNoteId={currentNoteId}
-        setNote={setNote}
-        setCurrentNoteId={setCurrentNoteId}
-      />
+        <CurrentFolder
+          notes={notes}
+          currentNoteId={currentNoteId}
+          setNote={setNote}
+          setCurrentNoteId={setCurrentNoteId}
+        />
 
-      <Note saveAll={saveAll} notes={notes} note={note} />
+        <Note saveAll={saveAll} notes={notes} note={note} />
+      </div>
+
+      <div className="message">{message}</div>
 
       <style>{`
         .main {
           display: grid;
+          grid-template-rows: 1fr auto;
+        }
+        .main .wrapper {
+          display: grid;
           grid-template-columns: 150px 150px 1fr;
+        }
+        .message {
+          background: black;
+          color: #ff9000;
         }
       `}</style>
     </div>

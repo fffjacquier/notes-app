@@ -27,7 +27,9 @@ const CurrentFolder = ({ folders, setNote, notes }) => {
             >
               <a>{folder}</a>
             </Link>
-            <span>{notes.filter((note) => note.folder == folder).length}</span>
+            <span className="notesNumber">
+              {notes.filter((note) => note.folder == folder).length}
+            </span>
           </p>
         ))}
       </div>
@@ -58,6 +60,10 @@ const CurrentFolder = ({ folders, setNote, notes }) => {
           }
           section {
             background: '#efefef';
+          }
+          .notesNumber {
+            font-size: 1.2rem;
+            color: grey;
           }
         `}
       </style>

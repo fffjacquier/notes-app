@@ -1,10 +1,16 @@
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
+import { format, formatISO, parseISO } from 'date-fns'
 import useForm from '../hooks/useForm'
 
 const Note = ({ notes, saveAll, setNotes, note }) => {
   const router = useRouter()
   const { values, handleChange, handleSubmit } = useForm(save)
+  const thedate = note.updatedAt || note.createdAt
+  let fmtDate
+  if (thedate) {
+    fmtDate = format(parseISO(thedate), 'MMMM d, yyyy h:mm')
+  }
 
   let typingTimer
   const doneTypingInterval = 2000
@@ -58,6 +64,7 @@ const Note = ({ notes, saveAll, setNotes, note }) => {
             handleSubmit()
           }}
         >
+          {fmtDate && <p className="date">{fmtDate}</p>}
           <textarea
             key={note.id}
             name="content"
@@ -80,6 +87,12 @@ const Note = ({ notes, saveAll, setNotes, note }) => {
         }
         textarea:focus {
           outline: none;
+        }
+        .date {
+          text-align: center;
+          color: grey;
+          text-shadow: none;
+          font-size: 1.2rem;
         }
       `}</style>
     </section>

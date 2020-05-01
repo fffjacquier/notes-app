@@ -20,13 +20,12 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 
 ## TODOs
 
-1. make New page
-2. add tests
-3. what happen when you remove all notes by default?
-4. nprogress when saving?
-5. add dynamic menus to remvoe/add folder notes
-6. add date at top of note
-7. add sort for notes in current folder
+1. add tests
+2. what happen when you remove all notes by default?
+3. nprogress when saving?
+4. delete note, delete folder feature
+5. add dynamic menus
+6. add sort for notes in current folder
 
 •• Done
 
@@ -37,3 +36,6 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 - add number of notes with folders name
 - refactor save + debounce like
 - export all notes as a zip of folder/files.txt
+- add date at top of note
+- create new note basic
+- add bottom bar when display messages, saving.., saved!,...

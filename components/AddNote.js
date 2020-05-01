@@ -26,7 +26,7 @@ const AddNote = () => {
         },
       ],
     }
-    console.log(newNotes)
+    // console.log(newNotes)
 
     let data = JSON.stringify(newNotes)
 

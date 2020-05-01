@@ -3,22 +3,6 @@ import Link from 'next/link'
 import theme from '../styles/theme'
 
 const Layout = ({ children, home }) => {
-  async function getZip() {
-    // get all notes as json
-    const res = await fetch('/api/notes')
-      .then((resp) => resp.json())
-      .then((data) => {
-        console.log(data)
-        fetch('/api/note/zip', {
-          method: 'POST',
-          body: JSON.stringify(data),
-        })
-          .then((resp) => console.log('zip resp:', resp))
-          .catch((err) => console.error(err))
-      })
-      .catch((err) => console.error(err))
-  }
-
   return (
     <div>
       <Head>
@@ -26,7 +10,11 @@ const Layout = ({ children, home }) => {
       </Head>
       <header className="header">
         <h1>Notes</h1>
-        <button onClick={getZip}>Export as zip</button>
+        {/* <Link passHref> */}
+        <a href="/api/notes/zip" download>
+          Export as zip
+        </a>
+        {/* </Link> */}
         <Link href="/">
           <a>All</a>
         </Link>

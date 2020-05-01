@@ -10,17 +10,15 @@ const Layout = ({ children, home }) => {
       </Head>
       <header className="header">
         <h1>Notes</h1>
-        {/* <Link passHref> */}
-        <a href="/api/notes/zip" download>
-          Export as zip
-        </a>
-        {/* </Link> */}
         <Link href="/">
           <a>All</a>
         </Link>
-        {/* <Link href="/addnote">
+        <Link href="/addnote">
           <a>New</a>
-        </Link> */}
+        </Link>
+        <a href="/api/note/zip" download>
+          Export as zip
+        </a>
       </header>
       <style jsx>{`
         .header {

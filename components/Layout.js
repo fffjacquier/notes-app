@@ -18,9 +18,9 @@ const Layout = ({ children, home }) => {
         <Link href="/">
           <a>All</a>
         </Link>
-        <Link href="/addnote">
+        {/* <Link href="/addnote">
           <a>New</a>
-        </Link>
+        </Link> */}
       </header>
       <style jsx>{`
         .header {

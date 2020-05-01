@@ -20,7 +20,7 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 
 ## TODOs
 
-1. export as pdf or text
+1. export as pdf or text or zip
 2. make New page
 3. add tests
 4. what happen when you remove all notes by default?

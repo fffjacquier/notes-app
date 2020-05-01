@@ -1,14 +1,13 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useState } from "react";
+import { useState } from 'react'
 
 const CurrentFolder = ({ folders, setNote, notes }) => {
-  const router = useRouter();
+  const router = useRouter()
   const [currentFolder, setCurrentFolder] = useState(router.query.currentFolder)
 
   function handleClick(e, folder) {
-    e.preventDefault();
-    router.push({ pathname: '/', query : { currentFolder: folder } })
+    e.preventDefault()
   }
 
   return (
@@ -17,7 +16,7 @@ const CurrentFolder = ({ folders, setNote, notes }) => {
         {folders.map((folder, index) => (
           <p
             className={folder === router.query.currentFolder ? 'selected' : ''}
-            onClick={e => handleClick(e, folder)}
+            onClick={(e) => handleClick(e, folder)}
             key={index}
           >
             <Link
@@ -28,43 +27,42 @@ const CurrentFolder = ({ folders, setNote, notes }) => {
             >
               <a>{folder}</a>
             </Link>
-            <span>{notes.filter(note => note.folder == folder).length}</span>
+            <span>{notes.filter((note) => note.folder == folder).length}</span>
           </p>
-          )
-        )}
+        ))}
       </div>
       <div className="action">
         <button>➕New folder</button>
       </div>
       <style jsx>
         {`
-        section {
-          display: grid;
-          grid-template-rows: 1fr 20px;
-          border-right: 1px solid #dedfde;
-        }
-        .action {
-          justify-self: center;
-        }
-        p {
-          cursor: pointer;
-          padding: 10px;
-          display: grid;
-          grid-gap: 10px;
-          grid-auto-flow: column;
-          grid-template-columns: 1fr;
-          align-items: center;
-        }
-        p.selected {
-          background-color: orange;
-        }
-        section {
-          background: '#efefef';
-        }
+          section {
+            display: grid;
+            grid-template-rows: 1fr 20px;
+            border-right: 1px solid #dedfde;
+          }
+          .action {
+            justify-self: center;
+          }
+          p {
+            cursor: pointer;
+            padding: 10px;
+            display: grid;
+            grid-gap: 10px;
+            grid-auto-flow: column;
+            grid-template-columns: 1fr;
+            align-items: center;
+          }
+          p.selected {
+            background-color: orange;
+          }
+          section {
+            background: '#efefef';
+          }
         `}
       </style>
     </section>
   )
 }
 
-export default CurrentFolder;
+export default CurrentFolder
